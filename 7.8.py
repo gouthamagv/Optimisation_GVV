@@ -13,4 +13,6 @@ profit += 20 * x + 10 * y <= 800
 print(profit)
 status = profit.solve()
 print(p.LpStatus[status])
-print(p.value(x), p.value(y), p.value(profit.objective))
+print("Number of hectares in which x is grown:",p.value(x))
+print("Number of hectares in which y is grown:",p.value(y))
+print("Maximum Profit:",p.value(profit.objective))
