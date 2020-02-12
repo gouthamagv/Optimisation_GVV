@@ -32,7 +32,6 @@ Z_max += 1000 * 222 *sum( S) + 25 * 270 * sum(J)
 Z_max += Y[1] ==12000 + 1000 * (20 +40) *(S[1] -T[1])
 for i in range(1,30):
 	Z_max += R[i] ==25 * J[i]
-	Z_max += R[i] ==25 * J[i]
 	Z_max += S[i] + R[i] ==3000
 	Z_max += S[1] ==3000
 	if(i>=2 and i<7):
