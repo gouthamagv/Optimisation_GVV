@@ -1,18 +1,21 @@
 # solution for problem 7.8 from https://github.com/gadepall/school/blob/master/ncert/optimization/gvv_ncert_opt.pdf
-import pulp as p
+from cvxpy import *
+import numpy as np
 
-profit = p.LpProblem("profit_maximising_problem", p.LpMaximize)
+A = np.array(( [1, 1], [20, 10 ])).T
+b = np.array([ 50, 800 ]).reshape((2,-1))
+c = np.array([ 10500, 9000 ])
 
-x = p.LpVariable("x", lowBound=0)
-y = p.LpVariable("y", lowBound=0)
+x = Variable((2,1))
 
-profit += 10500 * x + 9000 * y
-profit += x + y == 50
-profit += 20 * x + 10 * y <= 800
+f = c @ x
+obj = Maximize(f)
 
-print(profit)
-status = profit.solve()
-print(p.LpStatus[status])
-print("Number of hectares in which x is grown:",p.value(x))
-print("Number of hectares in which y is grown:",p.value(y))
-print("Maximum Profit:",p.value(profit.objective))
+constraints = [A.T @ x <= b]
+
+
+Problem(obj, constraints).solve()
+
+print("Number of hectares of land with X crop",x.value[0])
+print("Number of hectares of land with Y crop",x.value[1])
+print("Maximum profit =",f.value)
